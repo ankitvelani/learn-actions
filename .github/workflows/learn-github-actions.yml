@@ -5,7 +5,6 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - run : echo "Deploying to production server on branch $GITHUB_REF"
       - run : echo "Deploying to production server on branch ${{job.status}}"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
