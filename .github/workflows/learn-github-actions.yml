@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run : echo "Hii"
+      - run:  echo "Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}"
       - run : echo "workflow ${{github.workflow}}"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
