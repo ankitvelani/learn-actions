@@ -5,6 +5,22 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
+     - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{SECRETS.EMAIL}}
+          password: ${{SECRETS.PASSWORD}}
+          subject: Opportunity for you
+          to: github-campus-group@smail.iitm.ac.in
+          cc: ce20b112@smail.iitm.ac.in
+          from: GitHub Campus Expert
+          html_body: file://temp.html
+          secure: true
+          ignore_cert: true
+          convert_markdown: true
+          priority: low
       - run : expr 1+1 > output.log
       - name : upload output file
         uses : actions/upload-artifact@v3
