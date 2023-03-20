@@ -30,7 +30,7 @@ jobs:
           python-version: 3.x
     - name: Read File
       env:
-          LOG_FILE: my-artifact/sample.log
+          LOG_FILE: ./my-artifact/sample.log
       run: python read_data.py
   
     
