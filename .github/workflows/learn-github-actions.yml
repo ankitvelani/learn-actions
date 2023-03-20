@@ -20,9 +20,10 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name : my-artifact
-    - name:
-      - run : ls -R
-      - run: cat ./sample.log
+    - name: List all the files
+      run : ls -R
+    - name: Display content
+      run: cat sample.log
     
 #     - name: Send mail
 #       uses: dawidd6/action-send-mail@v3
