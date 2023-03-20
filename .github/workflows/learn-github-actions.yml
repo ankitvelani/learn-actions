@@ -21,7 +21,8 @@ jobs:
       with:
         name : my-artifact
     - name:
-      run : ls -R
+      - run : ls -R
+      - run: cat ./sample.log
     
 #     - name: Send mail
 #       uses: dawidd6/action-send-mail@v3
