@@ -29,6 +29,8 @@ jobs:
       with:
           python-version: 3.x
     - name: Read File
+      env:
+          LOG_FILE: sample.log
       run: python read_data.py
   
     
