@@ -24,11 +24,13 @@ jobs:
       run : ls -R
     - name: Display content
       run: cat sample.log
+    - uses: actions/checkout@v3
     - uses: actions/setup-python@v3
       with:
           python-version: 3.x
     - name: Read File
-      run: python read_data.py
+      run: python send_email.py
+  
     
 #     - name: Send mail
 #       uses: dawidd6/action-send-mail@v3
