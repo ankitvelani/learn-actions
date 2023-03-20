@@ -28,7 +28,9 @@ jobs:
     - uses: actions/setup-python@v3
       with:
           python-version: 3.x
-    - name: Read File
+    - name: Read File using CAT
+      run: cat ./my-artifact/sample.log
+    - name: Read File using Python
       env:
           LOG_FILE: ./my-artifact/sample.log
       run: python read_data.py
