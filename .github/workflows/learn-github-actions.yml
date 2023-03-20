@@ -5,6 +5,13 @@ jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
+      - shell : bash
+      - run : expr 1+1 > output.log
+      - name : upload output file
+        uses : actions/upload-artifact@v3
+        with: 
+            name: output-log-file
+            path : output.log
       - run : echo "Hii"
       - run:  echo "Deploy to ${{ inputs.deploy_target }} by @${{ github.actor }}"
       - run : echo "workflow ${{github.workflow}}"
