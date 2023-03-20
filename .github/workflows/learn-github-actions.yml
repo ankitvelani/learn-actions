@@ -24,6 +24,13 @@ jobs:
       run : ls -R
     - name: Display content
       run: cat sample.log
+    - uses: actions/setup-python@v3
+        with:
+          python-version: 3.x
+        - name: Read File
+          env:
+            LOG_FILE: sample.log
+          run: python read.py
     
 #     - name: Send mail
 #       uses: dawidd6/action-send-mail@v3
