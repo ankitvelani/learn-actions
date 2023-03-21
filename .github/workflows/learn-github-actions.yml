@@ -29,7 +29,7 @@ jobs:
       with:
           python-version: 3.x
     - name: Read File using CAT
-      run: cat ./sample.log
+      run: cat sample.log
     - name: Read File using Python
       env:
           LOG_FILE: ./my-artifact/sample.log
