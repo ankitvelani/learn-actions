@@ -7,6 +7,43 @@ from email.mime.text import MIMEText
 from email.utils import COMMASPACE, formatdate
 from email import encoders
 
+import requests
+import pandas as pd
+
+
+current_date = '2023-03-27'
+# The API endpoint
+url = f"http://issue.c1.biz/data.php?current_date={current_date}"
+
+# A GET request to the API
+response = requests.get(url)
+
+# Print the response
+response_json = response.json()
+
+data = pd.DataFrame(response_json)
+data = data.reset_index()
+data['index'] = data['index']+1
+del data['id']
+
+data.rename({"index": "Sr.No",
+             "issue" : "Issue/Problem",
+            "issue_solution": "Resolution",
+            "issue_for_user": "Users",
+            "department": "Department",
+            "issue_engineer": "Engineer",
+            "issue_status": "Status",
+            "issue_date": "Date"}, axis=1, inplace=True)
+
+data['Time'] = data['issue_time_from']+' - '+data['issue_time_to']
+del data['issue_time_from']
+del data['issue_time_to']
+
+
+current_date_str = current_date.replace('-','_')
+data.to_excel("Issue-Report_"+current_date_str+".xlsx", index=False)
+
+#=====================================
 port = 465
 smtp_server = "smtp.gmail.com"
 USERNAME = os.environ.get('MAIL_USERNAME')
@@ -57,7 +94,7 @@ def send_mail(send_from, send_to, subject, message, files=[],
     smtp.sendmail(send_from, send_to, msg.as_string())
     smtp.quit()
 
-send_mail(sender,destination, "Test", "Hii", ['send_email.py'],smtp_server, 587, USERNAME, PASSWORD)
+send_mail(sender,destination, "Test", "Hii", ["Issue-Report_"+current_date_str+".xlsx"],smtp_server, 587, USERNAME, PASSWORD)
 
 # message = """\
 # Subject: GitHub Email Report
